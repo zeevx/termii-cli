@@ -17,9 +17,16 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5.5",
+        "illuminate/database": "^8.40",
+        "illuminate/http": "^8.0",
+        "illuminate/redis": "^8.0",
+        "laminas/laminas-text": "^2.8",
         "laravel-zero/framework": "^8.8"
     },
     "require-dev": {
+        "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.3",
         "pestphp/pest": "^1.3"
     },
@@ -40,5 +47,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": ["application"]
+    "bin": ["termii-cli"]
 }
