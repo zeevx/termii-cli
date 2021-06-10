@@ -3,8 +3,8 @@
 namespace App\Commands;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use LaravelZero\Framework\Commands\Command;
 
 class CheckBalance extends Command
@@ -33,23 +33,38 @@ class CheckBalance extends Command
 
         //Check if Key is set
         $this->task("Check if API Key is set...", function () {
-            if (Cache::has('key')){
+            if (Storage::exists('TERMII/env.php')){
                 return true;
             }
             return false;
         });
 
-        //Get Stored Api key
-        $key = Cache::get('key', 'Not Set');
+        if (Storage::exists('TERMII/env.php')) {
 
-        //Print Key
-        $this->info("API-KEY: ".$key);
+            //Get Stored Api key
+            $key = Storage::get('TERMII/env.php') ?? "No-Key";
 
-        $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
-        $response = $request->getBody()->getContents();
+            //Print Key
+            $this->info("API-KEY: " . $key);
 
-        //Print Response
-        $this->info("Termii Response: $response");
+
+            $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
+
+            $this->task("Checking balance...", function () use ($request) {
+                if ($request) {
+                    return true;
+                }
+                return false;
+            });
+
+            $response = $request->getBody()->getContents();
+
+            //Print Response
+            $this->info("Termii Response: $response");
+        }
+        else{
+            $this->error("Key not set");
+        }
     }
 
     /**

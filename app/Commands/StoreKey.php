@@ -2,8 +2,7 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use LaravelZero\Framework\Commands\Command;
 
 class StoreKey extends Command
@@ -22,31 +21,27 @@ class StoreKey extends Command
      */
     protected $description = 'Store your api-key gotten from your Termii Dashboard.';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
+    public function go(){
         //Get Key
         $key = $this->ask('Input your api key(gotten from Termii dashboard)');
 
         //Flush Cache
         $this->task("Flushing system..", function () {
-            Cache::flush();
+            if (Storage::exists('TERMII/env.php')){
+                Storage::delete('TERMII/env.php');
+            }
             return true;
         });
 
         //Set Key in DB
         $this->task("Storing/Updating API Key...", function () use ($key) {
-            Cache::forever('key', $key);
+            Storage::put('TERMII/env.php', $key);
             return true;
         });
 
         //Check if Key is set
         $this->task("Checking if API Key is set...", function () {
-            if (Cache::has('key')){
+            if (Storage::exists('TERMII/env.php')){
                 return true;
             }
             return false;
@@ -57,13 +52,13 @@ class StoreKey extends Command
     }
 
     /**
-     * Define the command's schedule.
+     * Execute the console command.
      *
-     * @param Schedule $schedule
      * @return void
      */
-    public function schedule(Schedule $schedule): void
+    public function handle()
     {
-        // $schedule->command(static::class)->everyMinute();
+        $this->go();
     }
+
 }
