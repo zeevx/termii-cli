@@ -21,7 +21,7 @@ class Request extends Command
      *
      * @var string
      */
-    protected $description = 'Retrieve the status of all registered sender ID.';
+    protected $description = 'Request a new sender ID.';
 
     /**
      *
