@@ -1,5 +1,5 @@
 {
-    "name": "zeevx/terminal-cli",
+    "name": "zeevx/termii-cli",
     "description": "Set up, test, and manage your Termii integration directly from the terminal.",
     "keywords": ["termii", "command", "terminal", "console", "cli"],
     "homepage": "https://termii-cli.netlify.app",
