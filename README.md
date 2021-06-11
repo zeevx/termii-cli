@@ -2,14 +2,14 @@
     <img title="Termii" src="https://termii.com/assets/images/logo.png"/>
 </p>
 
-## Flutterwave CLI
+## Termii CLI
 The TERMII CLI application helps you Set up, test, and manage your Termii integration directly from the terminal.
 
 ## Setup:
 1. Ensure you have composer installed on your computer. You can confirm this by running `composer -v` from your terminal. If you don't have it installed, you can download and install it using the [Composer](https://getcomposer.org/download/) docs.
 2. After successful installation of composer, run the command on your terminal `composer global require zeevx/termii-cli` to require it globally
 3. Run on your terminal `termii` to view the available commands.  
-4. Setup your CLI by adding your Flutterwave keys (Test and Live).  
+4. Setup your CLI by adding your Termii keys.  
    Run `termii key`.
 <!-- Run `termii-key`.   -->
 **NB:** This is a one time setup and your keys are stored in your computer and not sent to any server.
