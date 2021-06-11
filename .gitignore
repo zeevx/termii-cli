@@ -4,3 +4,5 @@
 /.vagrant
 .phpunit.result.cache
 /database/database.sqlite
+/TERMII
+/storage
