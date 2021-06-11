@@ -1,5 +1,4 @@
 * text=auto
-*.html
 *.css linguist-language=PHP
 /.github export-ignore
 .styleci.yml export-ignore
