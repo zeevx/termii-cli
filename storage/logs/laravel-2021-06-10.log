@@ -1,0 +1,9 @@
+[2021-06-10 23:59:02] development.INFO: ===Balance Response===  
+[2021-06-10 23:59:02] development.INFO: 
+{"user":"Paul Adams","balance":8,"currency":"NGN"}  
+[2021-06-10 23:59:20] development.INFO: ===History Response===  
+[2021-06-10 23:59:20] development.INFO: 
+{"data":[{"sender":"OwomiTech","receiver":"2349035875967","country_code":0,"message":"Hi there, testing Termii","amount":1,"reroute":0,"api_key":"TL4QCnI6UJBphaaZMUTOeBGMFWHIcj1PspiMbTrvuyBZF1vgQzqJw3otBe6cGD","status":"Message Sent","sms_type":"plain","send_by":"api","media_url":null,"message_id":"3527555618778961349","notify_url":null,"notify_id":null,"created_at":"2021-03-10 16:16:40"}]}  
+[2021-06-10 23:59:39] development.INFO: ===Status Response===  
+[2021-06-10 23:59:39] development.INFO: 
+{"message":"The given data was invalid.","errors":{"country_code":["The selected country code is invalid."]}}  

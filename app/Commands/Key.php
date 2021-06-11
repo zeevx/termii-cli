@@ -5,7 +5,7 @@ namespace App\Commands;
 use Illuminate\Support\Facades\Storage;
 use LaravelZero\Framework\Commands\Command;
 
-class StoreKey extends Command
+class Key extends Command
 {
     /**
      * The signature of the command.

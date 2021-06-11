@@ -2,35 +2,32 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use LaravelZero\Framework\Commands\Command;
 
-class CheckBalance extends Command
+class Status extends Command
 {
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'balance';
+    protected $signature = 'status';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Check your balance on Termii';
+    protected $description = 'Detect if a number is fake or has ported to a new network';
 
     /**
-     * Execute the console command.
      *
-     * @return void
      */
-    public function handle()
+    public function go()
     {
-
         //Check if Key is set
         $this->task("Check if API Key is set...", function () {
             if (Storage::exists('TERMII/env.php')){
@@ -47,10 +44,13 @@ class CheckBalance extends Command
             //Print Key
             $this->info("API-KEY: " . $key);
 
+            $phone = $this->ask('Enter the phone number(format: 234903875967)');
 
-            $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
+            $code = $this->ask('Enter the country code(format: "NG" - for Nigeria)');
 
-            $this->task("Checking balance...", function () use ($request) {
+            $request = Http::get("https://termii.com/api/insight/number/query?api_key=$key&phone_number=$phone&country_code=$code");
+
+            $this->task("Checking status...", function () use ($request) {
                 if ($request) {
                     return true;
                 }
@@ -59,22 +59,23 @@ class CheckBalance extends Command
 
             $response = $request->getBody()->getContents();
 
+            //Log Response
+            Log::info("===Status Response===");
+            Log::info($response);
+
             //Print Response
             $this->info("Termii Response: $response");
-        }
-        else{
-            $this->error("Key not set");
         }
     }
 
     /**
-     * Define the command's schedule.
+     * Execute the console command.
      *
-     * @param Schedule $schedule
      * @return void
      */
-    public function schedule(Schedule $schedule): void
+    public function handle()
     {
-        // $schedule->command(static::class)->everyMinute();
+        $this->go();
     }
+
 }

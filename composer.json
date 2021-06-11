@@ -20,8 +20,10 @@
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.5.5",
         "illuminate/http": "^8.0",
+        "illuminate/log": "^8.0",
         "laminas/laminas-text": "^2.8",
-        "laravel-zero/framework": "^8.8"
+        "laravel-zero/framework": "^8.8",
+        "nunomaduro/laravel-console-menu": "^3.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -45,5 +47,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": ["termii-cli"]
+    "bin": ["termii"]
 }
