@@ -14,10 +14,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        config(['logging.channels.single.path' => \Phar::running()
-            ? dirname(\Phar::running(false)) . '/logs/your-app.log'
-            : storage_path('logs/your-app.log')
-        ]);
     }
 
     /**
