@@ -76,8 +76,8 @@ class Request extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===SenderID Request Response===");
-            Log::info($response);
+//            Log::info("===SenderID Request Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");

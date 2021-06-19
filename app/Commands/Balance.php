@@ -63,8 +63,8 @@ class Balance extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===Balance Response===");
-            Log::info($response);
+//            Log::info("===Balance Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");

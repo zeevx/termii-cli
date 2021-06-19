@@ -62,8 +62,8 @@ class History extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===History Response===");
-            Log::info($response);
+//            Log::info("===History Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");

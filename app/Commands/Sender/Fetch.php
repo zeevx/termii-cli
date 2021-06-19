@@ -63,8 +63,8 @@ class Fetch extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===SenderIDs Response===");
-            Log::info($response);
+//            Log::info("===SenderIDs Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");

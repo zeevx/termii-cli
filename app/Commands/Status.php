@@ -66,8 +66,8 @@ class Status extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===Status Response===");
-            Log::info($response);
+//            Log::info("===Status Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");

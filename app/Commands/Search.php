@@ -64,8 +64,8 @@ class Search extends Command
             $response = $request->getBody()->getContents();
 
             //Log Response
-            Log::info("===Search Response===");
-            Log::info($response);
+//            Log::info("===Search Response===");
+//            Log::info($response);
 
             //Print Response
             $this->info("Termii Response: $response");
