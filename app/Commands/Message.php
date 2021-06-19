@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use Exception;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -55,17 +56,12 @@ class Message extends Command
             $type = "plain";
 
             //Ask Channel
-            $channel = $this->menu('Select the route through which the message is sent.', [
-                'generic',
-                'dnd',
-                'whatsapp'
-            ])->setForegroundColour('green')
-                ->setBackgroundColour('black')
-                ->setWidth(100)
-                ->setPadding(10)
-                ->setMargin(5)
-                ->setExitButtonText("Abort")
-                ->open();
+            $channel = $this->ask("Select the route through which the message is sent. \nEnter 0 for Generic \nEnter 1 for DND \nEnter 2 for Whatsapp");
+
+            if ($channel != 0 || $channel != 1 || $channel != 2){
+                $this->error('Incorrect response, try again..');
+                die();
+            }
 
             $media = "";
             $media_url = "";
@@ -74,19 +70,14 @@ class Message extends Command
             if ($channel == 2){
 
                 //Ask Media
-                $media = $this->menu('Is this a media message? (When using the media parameter, the sms parameter will not be used)', [
-                    'yes',
-                    'no'
-                ])->setForegroundColour('green')
-                    ->setBackgroundColour('black')
-                    ->setWidth(100)
-                    ->setPadding(10)
-                    ->setMargin(5)
-                    ->setExitButtonText("Abort")
-                    ->open();
+                $media = $this->ask("Is this a media message? (When using the media parameter, the sms parameter will not be used) \nEnter 0 for Yes \nEnter 1 for No");
+
+                if ($media != 0 || $media != 1){
+                    $this->error('Incorrect response, try again..');
+                    die();
+                }
 
                 if ($media == 0){
-
                     //Ask Media URL
                     $media_url = $this->ask("Enter the url to the file resource.");
 
@@ -135,7 +126,12 @@ class Message extends Command
                 "channel" => $channel
             ];
 
-            $request = Http::post("https://termii.com/api/sms/send", $data);
+            try{
+                $request = Http::post("https://termii.com/api/sms/send", $data);
+            }catch (Exception $e){
+                $this->error('Connection Error');
+                die();
+            }
 
             $this->task("Sending message...", function () use ($request) {
                 if ($request) {

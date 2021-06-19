@@ -2,6 +2,7 @@
 
 namespace App\Commands\Sender;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -53,12 +54,17 @@ class Request extends Command
             //Print Key
             $this->info("API-KEY: " . $key);
 
-            $request = Http::post("https://termii.com/api/sender-id/request", [
-                "api_key" => $key,
-                "sender_id" => $sender_id,
-                "usecase" => $use_case,
-                "company" => $company
-            ]);
+            try{
+                $request = Http::post("https://termii.com/api/sender-id/request", [
+                    "api_key" => $key,
+                    "sender_id" => $sender_id,
+                    "usecase" => $use_case,
+                    "company" => $company
+                ]);
+            }catch (Exception $e){
+                $this->error('Connection Error');
+                die();
+            }
 
             $this->task("Requesting Sender-ID...", function () use ($request) {
                 if ($request) {

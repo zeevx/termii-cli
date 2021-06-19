@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -45,7 +46,12 @@ class Balance extends Command
             $this->info("API-KEY: " . $key);
 
 
-            $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
+            try{
+                $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
+            }catch (Exception $e){
+                $this->error('Connection Error');
+                die();
+            }
 
             $this->task("Checking balance...", function () use ($request) {
                 if ($request) {

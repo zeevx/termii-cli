@@ -19,12 +19,11 @@
         "php": "^7.3|^8.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.5.5",
-        "laravel-zero/framework": "^8.5",
+        "laravel-zero/framework": "^8.9",
         "illuminate/http": "^8.0",
         "illuminate/log": "^8.0",
         "laminas/laminas-text": "^2.8",
-        "laravel-zero/phar-updater": "^1.0.6",
-        "nunomaduro/laravel-console-menu": "^3.2"
+        "laravel-zero/phar-updater": "^1.0.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

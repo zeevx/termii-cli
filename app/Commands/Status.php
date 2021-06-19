@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +49,12 @@ class Status extends Command
 
             $code = $this->ask('Enter the country code(format: "NG" - for Nigeria)');
 
-            $request = Http::get("https://termii.com/api/insight/number/query?api_key=$key&phone_number=$phone&country_code=$code");
+            try{
+                $request = Http::get("https://termii.com/api/insight/number/query?api_key=$key&phone_number=$phone&country_code=$code");
+            }catch (Exception $e){
+                $this->error('Connection Error');
+                die();
+            }
 
             $this->task("Checking status...", function () use ($request) {
                 if ($request) {

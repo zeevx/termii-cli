@@ -2,6 +2,7 @@
 
 namespace App\Commands\Sender;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -44,7 +45,13 @@ class Fetch extends Command
             //Print Key
             $this->info("API-KEY: " . $key);
 
-            $request = Http::get("https://termii.com/api/sender-id?api_key=$key");
+            try{
+                $request = Http::get("https://termii.com/api/sender-id?api_key=$key");
+            }catch (Exception $e){
+                $this->error('Connection Error');
+                die();
+            }
+
 
             $this->task("Fetching Sender-IDs...", function () use ($request) {
                 if ($request) {
