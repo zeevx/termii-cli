@@ -50,7 +50,7 @@ class Status extends Command
             $code = $this->ask('Enter the country code(format: "NG" - for Nigeria)');
 
             try{
-                $request = Http::get("https://termii.com/api/insight/number/query?api_key=$key&phone_number=$phone&country_code=$code");
+                $request = Http::get("https://api.ng.termii.com/api/insight/number/query?api_key=$key&phone_number=$phone&country_code=$code");
             }catch (Exception $e){
                 $this->error('Connection Error');
                 die();
