@@ -46,7 +46,7 @@ class History extends Command
             $this->info("API-KEY: " . $key);
 
             try{
-                $request = Http::get("https://termii.com/api/sms/inbox?api_key=$key");
+                $request = Http::get("https://api.ng.termii.com/api/sms/inbox?api_key=$key");
             }catch (Exception $e){
                 $this->error('Connection Error');
                 die();

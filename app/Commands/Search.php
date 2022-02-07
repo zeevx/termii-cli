@@ -48,7 +48,7 @@ class Search extends Command
             $phone = $this->ask('Enter the phone number you want to search(format: 234903875967)');
 
             try{
-                $request = Http::get("https://termii.com/api/check/dnd?api_key=$key&phone_number=$phone");
+                $request = Http::get("https://api.ng.termii.com/api/check/dnd?api_key=$key&phone_number=$phone");
             }catch (Exception $e){
                 $this->error('Connection Error');
                 die();

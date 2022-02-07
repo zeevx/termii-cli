@@ -55,7 +55,7 @@ class Request extends Command
             $this->info("API-KEY: " . $key);
 
             try{
-                $request = Http::post("https://termii.com/api/sender-id/request", [
+                $request = Http::post("https://api.ng.termii.com/api/sender-id/request", [
                     "api_key" => $key,
                     "sender_id" => $sender_id,
                     "usecase" => $use_case,

@@ -127,7 +127,7 @@ class Message extends Command
             ];
 
             try{
-                $request = Http::post("https://termii.com/api/sms/send", $data);
+                $request = Http::post("https://api.ng.termii.com/api/sms/send", $data);
             }catch (Exception $e){
                 $this->error('Connection Error');
                 die();

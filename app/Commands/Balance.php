@@ -47,7 +47,7 @@ class Balance extends Command
 
 
             try{
-                $request = Http::get("https://termii.com/api/get-balance?api_key=$key");
+                $request = Http::get("https://api.ng.termii.com/api/get-balance?api_key=$key");
             }catch (Exception $e){
                 $this->error('Connection Error');
                 die();
